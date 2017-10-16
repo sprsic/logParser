@@ -2,7 +2,7 @@ package com.ef;
 
 import com.ef.model.RequestLogModel;
 import com.ef.parser.LogParser;
-import com.ef.service.InsertServiceImpl;
+import com.ef.service.IInsertService;
 import com.ef.service.LogServiceFactory;
 
 import java.sql.SQLException;
@@ -38,7 +38,7 @@ public class Parser {
                         filter((item) -> item.getNoOfRequest() >= threshold)
                 .collect(Collectors.toList());
         try {
-            InsertServiceImpl logService = LogServiceFactory.getLogService();
+            IInsertService logService = LogServiceFactory.getLogService();
             logService.insert(requestList);
         } catch (SQLException e) {
             throw new RuntimeException("Oops, something went wrong", e);

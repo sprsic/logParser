@@ -22,7 +22,7 @@ import static com.ef.Constants.DB_USER;
  *
  * @author Sasa Prsic 14/10/2017
  */
-public class InsertServiceImpl implements IInsertService {
+class InsertServiceImpl implements IInsertService {
     private final static String BAN_COMMENT = "Ip blocked because it is suspicious that made a lot of request in short amount of time";
 
     private static String INSERT_LOG_STATEMENT = "INSERT INTO request_log " +
