@@ -10,14 +10,16 @@ import java.util.List;
  *
  * @author Sasa Prsic 14/10/2017
  */
-interface IInsertService {
+public interface IInsertService {
 
     /**
      * Inserts the list of objects in the db.
      *
      * @param records - list of all records that will be inserted
      * @throws SQLException
+     *
+     * @return  returns a list of inserted data
      */
-    void insert(List<RequestLogModel> records) throws SQLException;
+    List<RequestLogModel> insert(List<RequestLogModel> records) throws SQLException;
 
 }

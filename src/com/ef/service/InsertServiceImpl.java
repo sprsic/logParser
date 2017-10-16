@@ -34,7 +34,7 @@ public class InsertServiceImpl implements IInsertService {
             "VALUES (?,?,?,?,?,?)";
 
     @Override
-    public void insert(List<RequestLogModel> records) throws SQLException {
+    public List<RequestLogModel> insert(List<RequestLogModel> records) throws SQLException {
         Connection connection = null;
         PreparedStatement insertRequestLogStatement = null;
         PreparedStatement insertRequestStatement = null;
@@ -43,7 +43,7 @@ public class InsertServiceImpl implements IInsertService {
         int insertedRequestLog = 0;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LogStash", DB_USER, DB_PASSWORD);
-            connection.setAutoCommit(false);
+            connection.setAutoCommit(false); //do all in transaction
             insertRequestLogStatement = connection.prepareStatement(INSERT_LOG_STATEMENT, Statement.RETURN_GENERATED_KEYS);
             insertRequestStatement = connection.prepareStatement(INSERT_REQUESTS_STATEMENT);
             for (RequestLogModel rm : records) {
@@ -67,12 +67,13 @@ public class InsertServiceImpl implements IInsertService {
                 }
                 countRequestLogBatch++;
             }
-            connection.commit();
+            connection.commit(); //commit commit commit :)
         } catch (SQLException e) {
             throw new RuntimeException("Error while inserting in db", e);
         } finally {
             connectionCleanup(connection, insertRequestLogStatement, insertRequestStatement);
         }
+        return records;
     }
 
     private void connectionCleanup(Connection connection, PreparedStatement insertRequestLogStatement, PreparedStatement insertRequestStatement) throws SQLException {
