@@ -12,19 +12,20 @@ Database DDL
 ------------
 ```sql
 create database LogStash;
-    create table request_log (
-    id BIGINT(11) NOT NULL AUTO_INCREMENT,
-    ip VARCHAR(15) NOT NULL,
-    no_of_requests INT,
-    request_start_date TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    request_end_date TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    ban_comment VARCHAR(255) NOT NULL,
-    created_timestamp TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP(6),
-    PRIMARY KEY(id),
-    INDEX RL_IP_INDEX (ip),
-    INDEX RL_REQUEST_NO_INDEX (no_of_requests),
-    INDEX RL_START_DT_INDEX (request_start_date),
-    INDEX RL_END_DT_INDEX (request_end_date)
+    
+create table request_log (
+  id BIGINT(11) NOT NULL AUTO_INCREMENT,
+  ip VARCHAR(15) NOT NULL,
+  no_of_requests INT,
+  request_start_date TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  request_end_date TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  ban_comment VARCHAR(255) NOT NULL,
+  created_timestamp TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP(6),
+  PRIMARY KEY(id),
+  INDEX RL_IP_INDEX (ip),
+  INDEX RL_REQUEST_NO_INDEX (no_of_requests),
+  INDEX RL_START_DT_INDEX (request_start_date),
+  INDEX RL_END_DT_INDEX (request_end_date)
 );
 
 
