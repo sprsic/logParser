@@ -20,7 +20,7 @@ create database LogStash;
     INDEX RL_IP_INDEX (ip),
     INDEX RL_REQUEST_NO_INDEX (no_of_requests),
     INDEX RL_START_DT_INDEX (request_start_date),
-    INDEX RL_END_DT_INDEX (request_end_date),
+    INDEX RL_END_DT_INDEX (request_end_date)
 );
 
 
@@ -38,9 +38,9 @@ create table request (
 ```
 #Write MySQL query to find IPs that mode more than a certain number of requests for a given time period.
 ```sql
-SET @number_of_request = 250; #variable defining number of request occurrence
+SET @number_of_request = 200; #variable defining number of request occurrence
 SET @start_date_time = '2017-01-01 13:00:00'; #start time
-SET @end_date_time = '2017-01-05 13:00:00'; # end time
+SET @end_date_time = '2017-01-02 13:00:00'; # end time
 SELECT ip,sum(request_log.no_of_requests) as sumOfRequest  from request_log WHERE request_start_date >= @start_date_time AND request_end_date < @end_date_time
 group by request_log.ip having sumOfRequest>=@number_of_request;
 
