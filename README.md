@@ -1,8 +1,12 @@
 To run the program:
 java -cp "parser.jar" com.ef.Parser --startDate=2017-01-01.13:00:00 --duration=hourly --threshold=100
-	The tool will find any IPs that made more than 100 requests starting from 2017-01-01.13:00:00 to 2017-01-01.14:00:00 (one hour) and print them to console AND also load them to another MySQL table with comments on why it's blocked.
+The tool will find any IPs that made more than 100 requests starting from 2017-01-01.13:00:00 to 2017-01-01.14:00:00 (one hour) and print them to console AND also load them to another MySQL table with comments on why it's blocked.
+
+In order to run file first you need to create parser.jar.
 	
 Configuration for the program can be found in com.ef.Constants class like db user and password and log file path.
+Log file access.log is bundled in jar if you want to change it just change the file in src/resources/com/ef/parser/access.log 
+and after that build the jar.
 
 Database DDL
 ------------
@@ -46,6 +50,6 @@ group by request_log.ip having sumOfRequest>=@number_of_request;
 
 
 #Write MySQL query to find requests made by a given IP.
-SET @ip = '127.0.0.1'; #variable defining search ip
+SET @ip = '192.168.228.188'; #variable defining search ip
 SELECT * FROM request_log INNER JOIN request ON request_log.id = request.request_log_id WHERE request_log.ip = @ip;
 ```

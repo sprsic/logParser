@@ -13,7 +13,7 @@ public class Constants {
     public final static String DB_PASSWORD = "piramida";
     public final static String DB_USER = "root";
     public final static int BATCH_SIZE = 1000;
-    public final static String LOG_FILE_PATH = "src/resources/access.log";
+    public final static String LOG_FILE_PATH = "access.log";
 
     private Constants() {
     }

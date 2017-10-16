@@ -3,6 +3,7 @@ package com.ef.parser;
 import com.ef.model.RequestLogModel;
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -21,12 +22,12 @@ public class LogParserTest {
     private final static DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd.HH:mm:ss");
 
     @Test()
-    public void testParser2Inputs() {
+    public void testParser2Inputs() throws UnsupportedEncodingException {
 
         LocalDateTime startDateTime = LocalDateTime.parse("2017-01-01.00:01:00", inputDateTimeFormatter);
         LocalDateTime endDateTime = LocalDateTime.parse("2017-01-01.00:02:00", inputDateTimeFormatter);
 
-        HashMap<String, RequestLogModel> occurrence = parser.parse("test/resources/access.log", startDateTime, endDateTime);
+        HashMap<String, RequestLogModel> occurrence = parser.parse("access.log", startDateTime, endDateTime);
 
         assertEquals(2, occurrence.values().size());
 
@@ -47,11 +48,11 @@ public class LogParserTest {
     }
 
     @Test()
-    public void testParserLowerBound() {
+    public void testParserLowerBound() throws UnsupportedEncodingException {
         LocalDateTime startDateTime = LocalDateTime.parse("2017-01-01.15:01:19", inputDateTimeFormatter);
         LocalDateTime endDateTime = LocalDateTime.parse("2017-01-01.16:01:19", inputDateTimeFormatter);
 
-        HashMap<String, RequestLogModel> occurrence = parser.parse("test/resources/access.log", startDateTime, endDateTime);
+        HashMap<String, RequestLogModel> occurrence = parser.parse("access.log", startDateTime, endDateTime);
 
         assertEquals(1, occurrence.values().size());
 
@@ -64,11 +65,11 @@ public class LogParserTest {
     }
 
     @Test()
-    public void testParserUpperBound() {
+    public void testParserUpperBound() throws UnsupportedEncodingException {
         LocalDateTime startDateTime = LocalDateTime.parse("2017-01-01.12:01:20", inputDateTimeFormatter);
         LocalDateTime endDateTime = LocalDateTime.parse("2017-01-01.13:01:20", inputDateTimeFormatter);
 
-        HashMap<String, RequestLogModel> occurrence = parser.parse("test/resources/access.log", startDateTime, endDateTime);
+        HashMap<String, RequestLogModel> occurrence = parser.parse("access.log", startDateTime, endDateTime);
 
         assertEquals(1, occurrence.values().size());
 
@@ -82,11 +83,11 @@ public class LogParserTest {
 
 
     @Test()
-    public void testParserDailyBound() {
+    public void testParserDailyBound() throws UnsupportedEncodingException {
         LocalDateTime startDateTime = LocalDateTime.parse("2017-01-01.00:00:00", inputDateTimeFormatter);
         LocalDateTime endDateTime = LocalDateTime.parse("2017-01-01.23:59:59", inputDateTimeFormatter);
 
-        HashMap<String, RequestLogModel> occurrence = parser.parse("test/resources/access.log", startDateTime, endDateTime);
+        HashMap<String, RequestLogModel> occurrence = parser.parse("access.log", startDateTime, endDateTime);
 
         assertEquals(4, occurrence.values().size());
 

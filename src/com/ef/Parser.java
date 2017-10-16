@@ -5,6 +5,7 @@ import com.ef.parser.LogParser;
 import com.ef.service.IInsertService;
 import com.ef.service.LogServiceFactory;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -17,7 +18,7 @@ import static com.ef.Constants.LOG_FILE_PATH;
 
 public class Parser {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedEncodingException {
         String startDate = args[0].split("=")[1];
         String duration = args[1].split("=")[1];
         int threshold = Integer.valueOf(args[2].split("=")[1]);

@@ -5,10 +5,9 @@ import com.ef.model.RequestLogModel;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
@@ -22,15 +21,19 @@ import static com.ef.Constants.logDateTimeFormatter;
 public class LogParser {
 
 
-    public HashMap<String, RequestLogModel> parse(String stringPath, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    public HashMap<String, RequestLogModel> parse(String stringPath, LocalDateTime startDateTime, LocalDateTime endDateTime) throws UnsupportedEncodingException {
 
         // if the file is too big and load of data is in there with different ips this could lead to memory overflow
         // one solution could be increasing heap of using off heap memory like (ChronicleMap- open HFT or terracotta off heap )
         // lets assume that there is no that much of data :)
         HashMap<String, RequestLogModel> occurenceMap = new HashMap<>();
+        InputStream in = LogParser.class.getResourceAsStream(stringPath);
 
-        Path path = Paths.get(stringPath);
-        try (BufferedReader reader = Files.newBufferedReader(path, Charset.forName("UTF-8"))) {
+        if (in == null) {
+            throw new RuntimeException("resource not found in path " + stringPath);
+        }
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"))) {
             String[] logLineData;
             String line;
             while ((line = reader.readLine()) != null) {// iterate trough the file line by line
