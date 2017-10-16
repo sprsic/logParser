@@ -26,7 +26,7 @@ public class LogParserTest {
         LocalDateTime startDateTime = LocalDateTime.parse("2017-01-01.00:01:00", inputDateTimeFormatter);
         LocalDateTime endDateTime = LocalDateTime.parse("2017-01-01.00:02:00", inputDateTimeFormatter);
 
-        HashMap<String, RequestLogModel> occurrence = parser.parse("test/access.log", startDateTime, endDateTime);
+        HashMap<String, RequestLogModel> occurrence = parser.parse("test/resources/access.log", startDateTime, endDateTime);
 
         assertEquals(2, occurrence.values().size());
 
@@ -51,7 +51,7 @@ public class LogParserTest {
         LocalDateTime startDateTime = LocalDateTime.parse("2017-01-01.15:01:19", inputDateTimeFormatter);
         LocalDateTime endDateTime = LocalDateTime.parse("2017-01-01.16:01:19", inputDateTimeFormatter);
 
-        HashMap<String, RequestLogModel> occurrence = parser.parse("test/access.log", startDateTime, endDateTime);
+        HashMap<String, RequestLogModel> occurrence = parser.parse("test/resources/access.log", startDateTime, endDateTime);
 
         assertEquals(1, occurrence.values().size());
 
@@ -68,7 +68,7 @@ public class LogParserTest {
         LocalDateTime startDateTime = LocalDateTime.parse("2017-01-01.12:01:20", inputDateTimeFormatter);
         LocalDateTime endDateTime = LocalDateTime.parse("2017-01-01.13:01:20", inputDateTimeFormatter);
 
-        HashMap<String, RequestLogModel> occurrence = parser.parse("test/access.log", startDateTime, endDateTime);
+        HashMap<String, RequestLogModel> occurrence = parser.parse("test/resources/access.log", startDateTime, endDateTime);
 
         assertEquals(1, occurrence.values().size());
 
@@ -86,7 +86,7 @@ public class LogParserTest {
         LocalDateTime startDateTime = LocalDateTime.parse("2017-01-01.00:00:00", inputDateTimeFormatter);
         LocalDateTime endDateTime = LocalDateTime.parse("2017-01-01.23:59:59", inputDateTimeFormatter);
 
-        HashMap<String, RequestLogModel> occurrence = parser.parse("test/access.log", startDateTime, endDateTime);
+        HashMap<String, RequestLogModel> occurrence = parser.parse("test/resources/access.log", startDateTime, endDateTime);
 
         assertEquals(4, occurrence.values().size());
 
