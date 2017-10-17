@@ -41,6 +41,7 @@ create table request (
     FOREIGN KEY (request_log_id) REFERENCES request_log(id)
 );
 ```
+#SQL query assumes that there will be no overlaps of run dates from the parser.
 #Write MySQL query to find IPs that mode more than a certain number of requests for a given time period.
 ```sql
 SET @number_of_request = 200; #variable defining number of request occurrence
