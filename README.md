@@ -8,7 +8,7 @@ Configuration for the program can be found in com.ef.Constants class like db use
 Log file access.log is bundled in jar if you want to change it just change the file in src/resources/com/ef/parser/access.log 
 and after that build the jar.
 
-Database DDL
+Database DDL (Use Mysql 5.7 that supports fractional seconds)
 ------------
 ```sql
 create database LogStash;
