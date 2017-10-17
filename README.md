@@ -41,7 +41,6 @@ create table request (
     FOREIGN KEY (request_log_id) REFERENCES request_log(id)
 );
 ```
-#SQL query assumes that there will be no overlaps of run dates from the parser.
 #Write MySQL query to find IPs that mode more than a certain number of requests for a given time period.
 ```sql
 SET @number_of_request = 200; #variable defining number of request occurrence
@@ -53,5 +52,6 @@ group by request_log.ip having sumOfRequest>=@number_of_request;
 
 #Write MySQL query to find requests made by a given IP.
 SET @ip = '192.168.228.188'; #variable defining search ip
-SELECT * FROM request_log INNER JOIN request ON request_log.id = request.request_log_id WHERE request_log.ip = @ip;
+SELECT * FROM request_log INNER JOIN request ON request_log.id = request.request_log_id WHERE request_log.ip = @ip group by request.request_date;
+
 ```
