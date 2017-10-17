@@ -45,9 +45,8 @@ create table request (
 ```sql
 SET @number_of_request = 200; #variable defining number of request occurrence
 SET @start_date_time = '2017-01-01 13:00:00'; #start time
-SET @end_date_time = '2017-01-02 13:00:00'; # end time
-SELECT ip,sum(request_log.no_of_requests) as sumOfRequest  from request_log WHERE request_start_date >= @start_date_time AND request_end_date < @end_date_time
-group by request_log.ip having sumOfRequest>=@number_of_request;
+SET @end_date_time = '2017-01-01 14:00:00'; # end time
+SELECT ip, count(distinct request.request_date) as sumOfRequest  from request inner join request_log on request.request_log_id = request_log.id WHERE request_date >= @start_date_time AND request_date < @end_date_time group by request_log.ip having sumOfRequest>=@number_of_request;
 
 
 #Write MySQL query to find requests made by a given IP.
