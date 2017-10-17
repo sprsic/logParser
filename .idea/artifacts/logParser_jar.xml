@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="logParser:jar">
+    <output-path>$PROJECT_DIR$/build</output-path>
+    <root id="archive" name="logParser.jar">
+      <element id="module-output" name="logParser" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/mysql-connector-java-5.1.44-bin.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
